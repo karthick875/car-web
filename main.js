@@ -1,64 +1,98 @@
-/**
- * ELITE AUTO CARE — main.js
- * Friendly Local Workshop Interactivity
- */
+/* ============================================================
+   ELITE AUTO CARE — LOCAL WORKSHOP DESIGN STYLESHEET
+   ============================================================ */
 
-'use strict';
+:root {
+  --red: #c41e3a;
+  --red-hover: #9e142c;
+  --red-subtle: #fde8eb;
+  --dark: #1e293b;
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Rajdhani', sans-serif;
+}
 
-document.addEventListener('DOMContentLoaded', () => {
+body {
+  font-family: var(--font-main);
+  color: #334155;
+  background-color: #ffffff;
+  line-height: 1.6;
+}
 
-  // Auto set copyright year
-  const yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+/* Typography & Utility */
+.font-mono { font-family: var(--font-mono); letter-spacing: 0.5px; }
+.fs-7 { font-size: 0.85rem; }
+.max-w-700 { max-width: 700px; }
+.bg-red { background-color: var(--red) !important; }
+.text-red { color: var(--red) !important; }
+.bg-red-subtle { background-color: var(--red-subtle) !important; }
 
-  // Contact Form Submission
-  const form = document.getElementById('contactForm');
-  const alertBox = document.getElementById('formAlert');
+/* Buttons */
+.btn-red {
+  background-color: var(--red);
+  color: #ffffff;
+  border: 1px solid var(--red);
+  transition: all 0.2s ease-in-out;
+}
 
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const submitBtn = form.querySelector('button[type="submit"]');
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
-      }
+.btn-red:hover {
+  background-color: var(--red-hover);
+  border-color: var(--red-hover);
+  color: #ffffff;
+}
 
-      setTimeout(() => {
-        form.reset();
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = '<i class="fas fa-calendar-check me-2"></i>Send Booking Request';
-        }
-        if (alertBox) {
-          alertBox.classList.remove('d-none');
-          setTimeout(() => alertBox.classList.add('d-none'), 5000);
-        }
-      }, 1000);
-    });
-  }
+/* Top Bar */
+.top-bar {
+  font-size: 0.825rem;
+}
 
-  // Active Navbar Link Highlight on Scroll
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+/* Navigation Links */
+.navbar-nav .nav-link {
+  font-size: 0.925rem;
+  padding: 0.4rem 0.75rem !important;
+  transition: color 0.2s ease;
+}
 
-  window.addEventListener('scroll', () => {
-    let current = '';
-    const scrollPos = window.scrollY + 100;
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: var(--red) !important;
+}
 
-    sections.forEach(section => {
-      if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
-        current = section.getAttribute('id');
-      }
-    });
+/* Service Cards */
+.service-card {
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
 
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('active');
-      }
-    });
-  });
+.service-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--red) !important;
+}
 
-});
+/* Floating Action Buttons */
+.float-btn {
+  position: fixed;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.float-btn:hover {
+  transform: scale(1.1);
+  color: #ffffff;
+}
+
+.float-whatsapp {
+  bottom: 80px;
+  background-color: #25d366;
+}
+
+.float-call {
+  bottom: 20px;
+  background-color: var(--red);
+}
